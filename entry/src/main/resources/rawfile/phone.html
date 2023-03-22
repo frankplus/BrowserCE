@@ -76,7 +76,9 @@
     }
 
     function func1() {
-       let array = [{src: "./bing.png", name:"必应", addr: "bing.com"},
+       let array = [
+                 {src: "./baidu.png", name:"必应", addr: "baidu.com"},
+                 {src: "./bing.png", name:"必应", addr: "bing.com"},
                  {src: "./bilibili.png", name: "哔哩哔哩", addr: "www.bilibili.com"},
                  {src: "./dianping.png", name: "大众点评", addr:"www.dianping.com"},
                  {src: "./dongchedi.png", name:"懂车帝", addr:"www.dongchedi.com"},
@@ -84,7 +86,7 @@
                  {src: "./pinduoduo.png", name: "拼多多", addr:"www.pinduoduo.com"},
 				 {src: "./sohu.png", name:"搜狐", addr: "www.sohu.com"},
                  {src: "./weibo.png", name:"微博", addr: "weibo.com/"},
-                 {src: "./weipinhui.png", name:"唯品会", addr:"www.vip.com"},
+                 //{src: "./weipinhui.png", name:"唯品会", addr:"www.vip.com"},
                  {src: "./yuedu.png", name:"阅读", addr:"m.zhangyue.com"},
                  {src: "./zhihu.png", name:"知乎", addr:"www.zhihu.com"},
                  {src: "./meituan.png", name:"美团", addr:"meituan.com"},]
@@ -96,8 +98,8 @@
 		box.style.flexDirection = 'column'
 		box.style.justifyContent = 'center'
 		box.style.alignItems = 'center'
-		box.style.height = '120px'
-		box.style.minWidth = '120px'
+		box.style.height = '100px'
+		box.style.minWidth = '60px'
 		box.style.borderRadius = '15px'
 		box.addEventListener('touchstart', function(e){
 			box.style.backgroundColor = '#e4e4e4'

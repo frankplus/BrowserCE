@@ -118,7 +118,7 @@ export struct TabletTitle {
           Logger.info(TAG, `onSubmit`)
           if (this.addr.length !== 0) {
             this.browser.webControllerArray[this.browser.tabArrayIndex].controller.loadUrl({
-              url: `https://${this.addr}`
+              url: `${this.addr}` // 移除追加 https:// 前缀
             })
             this.addr = ''
           }
@@ -212,7 +212,7 @@ export struct WebTab {
   testObj = {
     test: (addr) => {
       Logger.info(TAG, `addr= ${this.browser.tabArrayIndex}`)
-      this.browser.webControllerArray[this.browser.tabArrayIndex].controller.loadUrl({ url: `https://${addr}` })
+      this.browser.webControllerArray[this.browser.tabArrayIndex].controller.loadUrl({ url: `${addr}` }) // 移除追加 https:// 前缀
     },
     searchWord: (word: string) => {
       Logger.info(`search word= ${word}`)

@@ -132,10 +132,12 @@ export struct PhoneLayout {
         Column() {
           Row() {
             TextInput({ placeholder: '输入网址...', text: this.browser.inputValue })
-              .placeholderFont({ size: 16, weight: 500 })
-              .fontSize(16)
+              // 字体太大被遮挡，调成14
+              .placeholderFont({ size: 14, weight: 500 })
+              .fontSize(14)
               .margin(2)
-              .height(30)
+              // 垂直居中效果更好，改为32
+              .height(32)
               .onChange((value: string) => {
                 Logger.info(TAG, `onChange`)
                 this.addr = value
@@ -143,7 +145,7 @@ export struct PhoneLayout {
               .onSubmit((enterKey: EnterKeyType) => {
                 Logger.info(TAG, `onSubmit`)
                 this.browser.webControllerArray[this.browser.tabArrayIndex].controller.loadUrl({
-                  url: `https://${this.addr}`
+                  url: `${this.addr}` // 移除追加 https:// 前缀
                 })
                 this.addr = ''
               })

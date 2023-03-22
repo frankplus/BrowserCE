@@ -107,7 +107,7 @@ export class Browser {
   }
 
   loadUrl(addr: string) {
-    addr = "https://" + addr;
+//    addr = "https://" + addr; // 移除追加 https:// 前缀
     this.webControllerArray[this.tabArrayIndex].controller.loadUrl({ url: addr })
   }
 
