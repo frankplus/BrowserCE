@@ -1,4 +1,4 @@
-# Browser CE
+# BrowserCE
 
 ## 项目介绍
 
