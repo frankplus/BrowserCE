@@ -27,7 +27,7 @@ export default function appTest() {
     it(BUNDLE + 'StartAbilityFunction_001', 0, async function (done) {
       hilog.info(DOMAIN, TAG, BUNDLE + 'StartAbilityFunction_001 begin')
       let want = {
-        bundleName: "ohos.samples.browser1",
+        bundleName: "ohos.ohosdev.browserce",
         abilityName: "MainAbility"
       }
       var abilityDelegator: any
