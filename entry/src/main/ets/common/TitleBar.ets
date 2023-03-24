@@ -30,7 +30,7 @@ const UP_COLOR: string = '#00000000'
 
 // UA修正（参考原UA和HarmonyOS3.0的UA）
 const PAD_USER_AGENT: string = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTMl, like Gecko) Chrome/99.0.4844.88 Safari/537.36'
-const PHONE_USER_AGENT: string = 'Mozilla/5.0 (Linux; OpenHarmony 3.2; ohos) AppleWebKit/537.36 (KHTMl, like Gecko) Chrome/99.0.4844.88 Mobile Safari/537.36'
+const PHONE_USER_AGENT: string = 'Mozilla/5.0 (Linux; Android 10; OpenHarmony 3.2; ohos) AppleWebKit/537.36 (KHTMl, like Gecko) Chrome/99.0.4844.88 Mobile Safari/537.36'
 
 @Component
 export struct TabletTitle {
