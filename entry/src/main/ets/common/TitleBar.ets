@@ -20,8 +20,17 @@ const BUTTON_WIDTH: number = 22
 const BUTTON_RADIUS: number = 4
 const DOWN_COLOR: string = '#e4e4e4'
 const UP_COLOR: string = '#00000000'
-const PAD_USER_AGENT: string = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTMl, like Gecko) Chrome/92.0.4515.105 Safari/537.36'
-const PHONE_USER_AGENT: string = 'Mozilla/5.0 (Linux; Android 9; VRD-AL10; HMSCore 6.3.0.331) AppleWebKit/537.36 (KHTMl, like Gecko) Chrome/92.0.4515.105 HuaweiBrowser/12.0.4.1 Mobile Safari/537.36'
+
+// 不设置UA，测试实际UA
+// Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.88 Mobile Safari/537.36
+
+// 官方浏览器demo设置的UA
+// const PAD_USER_AGENT: string = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTMl, like Gecko) Chrome/92.0.4515.105 Safari/537.36'
+// const PHONE_USER_AGENT: string = 'Mozilla/5.0 (Linux; Android 9; VRD-AL10; HMSCore 6.3.0.331) AppleWebKit/537.36 (KHTMl, like Gecko) Chrome/92.0.4515.105 HuaweiBrowser/12.0.4.1 Mobile Safari/537.36'
+
+// UA修正（参考原UA和HarmonyOS3.0的UA）
+const PAD_USER_AGENT: string = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTMl, like Gecko) Chrome/99.0.4844.88 Safari/537.36'
+const PHONE_USER_AGENT: string = 'Mozilla/5.0 (Linux; OpenHarmony 3.2; ohos) AppleWebKit/537.36 (KHTMl, like Gecko) Chrome/99.0.4844.88 Mobile Safari/537.36'
 
 @Component
 export struct TabletTitle {
