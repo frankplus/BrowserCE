@@ -19,7 +19,7 @@ OpenHarmony 浏览器社区版，在原版Demo基础上做定制修改和优化
 - 修复地址栏字体太大被遮挡
 - 修复地址栏输入非https时无法跳转
 - 多处https前缀追加移除，兼容http地址
-- PhoneLayout图标布局调整，一行能显示更多
+- PhoneLayout图标和布局调整，一行显示更多
 
 ## 开发环境
 
@@ -30,4 +30,4 @@ OpenHarmony 浏览器社区版，在原版Demo基础上做定制修改和优化
 
 ## 效果预览
 
-xxx
+<img src="screenshots/01.jpg" width="300px" />

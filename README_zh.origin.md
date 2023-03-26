@@ -7,7 +7,7 @@
 
 |首页|打开网址|
 |----|------|
-|![](screenshots/device/home.png)|![](screenshots/device/jump.png)|
+|![](screenshot/device/home.png)|![](screenshot/device/jump.png)|
 
 使用说明:
 1. 连接Wifi，启动应用，展示默认页面内容;
