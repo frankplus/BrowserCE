@@ -1,5 +1,7 @@
 # BrowserCE
 
+<img src="entry/src/main/resources/base/media/icon.png" width="128px" />
+
 ## 项目介绍
 
 OpenHarmony 浏览器社区版，在原版Demo基础上做定制修改和优化
@@ -28,6 +30,10 @@ OpenHarmony 浏览器社区版，在原版Demo基础上做定制修改和优化
 - DevEco Studio 3.1 Beta1
 - SDK API9 3.2.10.6 Beta5 伪装替换为 Full-SDK API10 4.0.5.3 Canary1
 
-## 效果预览
+## 截图预览
 
 <img src="screenshots/01.jpg" width="300px" />
+
+## 视频演示
+
+https://www.bilibili.com/video/BV1Xs4y1S7UW
