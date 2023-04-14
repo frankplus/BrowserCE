@@ -16,7 +16,7 @@
 {
   "app": {
     "bundleName": "org.ohosdev.browserce",
-    "vendor": "westinyang",
+    "vendor": "ohosdev",
     "versionCode": 1000000,
     "versionName": "1.0.0",
     "icon": "$media:app_icon",
