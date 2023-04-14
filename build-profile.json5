@@ -15,20 +15,7 @@
 
 {
   "app": {
-    "signingConfigs": [
-      {
-        "name": "default",
-        "material": {
-          "certpath": "C:\\Users\\westinyang\\.ohos\\config\\openharmony\\auto_ohos_default_browser-ce_org.ohosdev.browserce.cer",
-          "storePassword": "0000001BCC404F9120493420A85202A730378EF2091D7208A5AE136BD51FC328A0EC7216D4559B50ADD6F5",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001B57AAC5BE74CDCA3863D637756E3D8ED734C1259189ED9018A13F8976F46B3F66593DF18E2E53F1",
-          "profile": "C:\\Users\\westinyang\\.ohos\\config\\openharmony\\auto_ohos_default_browser-ce_org.ohosdev.browserce.p7b",
-          "signAlg": "SHA256withECDSA",
-          "storeFile": "C:\\Users\\westinyang\\.ohos\\config\\openharmony\\auto_ohos_default_browser-ce_org.ohosdev.browserce.p12"
-        }
-      }
-    ],
+    "signingConfigs": [],
     "compileSdkVersion": 9,
     "compatibleSdkVersion": 9,
     "products": [
