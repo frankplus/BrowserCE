@@ -25,10 +25,10 @@ OpenHarmony 浏览器社区版，在原版Demo基础上做定制修改和优化
 
 ## 开发环境
 
-> [Full-SDK编译和替换指南](https://gitee.com/openharmony/docs/blob/OpenHarmony-3.2-Beta5/zh-cn/application-dev/quick-start/full-sdk-compile-guide.md#/openharmony/docs/blob/OpenHarmony-3.2-Beta5/zh-cn/application-dev/quick-start/full-sdk-switch-guide.md)
+> [Full-SDK编译和替换指南](https://gitee.com/openharmony/docs/blob/OpenHarmony-3.2-Release/zh-cn/application-dev/quick-start/full-sdk-compile-guide.md)
 
-- DevEco Studio 3.1 Beta1
-- SDK API9 3.2.10.6 Beta5 (Full-SDK)
+- DevEco Studio 3.1 Release
+- SDK API9 3.2.12.5 Release (Full-SDK)
 
 ## 截图预览
 
