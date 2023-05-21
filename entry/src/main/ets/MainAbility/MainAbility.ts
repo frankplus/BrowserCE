@@ -15,6 +15,7 @@
 
 import UIAbility from '@ohos.app.ability.UIAbility'
 import Logger from '../model/Logger'
+import WindowStageUtil from '../util/WindowStageUtil'
 
 const TAG = '[MainAbility]'
 
@@ -30,6 +31,8 @@ export default class MainAbility extends UIAbility {
     onWindowStageCreate(windowStage) {
         // Main window is created, set main page for this ability
         Logger.info(TAG, `MainAbility onWindowStageCreate`)
+
+        WindowStageUtil.setLayoutFullScreen(windowStage, WindowStageUtil.COLOR_WHITE, WindowStageUtil.COLOR_BLACK, '#fdfdfd', WindowStageUtil.COLOR_BLACK);
 
         windowStage.setUIContent(this.context, "pages/Index", null)
     }

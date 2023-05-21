@@ -272,6 +272,7 @@ export struct WebTab {
               }
             })
         }
+        .padding({bottom: 35.5})
       }, item => item.timestamp.toString())
     }
     .barHeight(0)

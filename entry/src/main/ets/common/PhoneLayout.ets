@@ -54,14 +54,16 @@ export struct PhoneLayout {
 
   @Builder ToolBar() {
     Column() {
+      // Divider().height(0.5).color('#e9eaec')
       if (!this.browser.hideProgress) {
         Progress({ value: this.browser.progress, total: 100 })
-          .color('#0000ff')
+          .color('#0000ff').width('100%').height(2)
+      } else {
+        Column().backgroundColor('#fdfdfd').width('100%').height(2)
       }
       Row() {
         ForEach(this.toolPoneArray, item => {
           Column() {
-            Divider().color('#e9eaec')
             Button({ type: ButtonType.Normal }) {
               Column() {
                 if (item.id !== 4) {
@@ -120,10 +122,13 @@ export struct PhoneLayout {
       }
       .justifyContent(FlexAlign.SpaceAround)
       .width('100%')
-      .height('100%')
+      .height(54)
+      .padding({bottom: 2})
       .backgroundColor('#fdfdfd')
     }
+    .backgroundColor('#fdfdfd')
     .height('100%')
+    .border({width: {top: 0.5}, color: '#d3d3d3'})
   }
 
   build() {
