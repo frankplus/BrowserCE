@@ -32,7 +32,7 @@ OpenHarmony 浏览器社区版，在原版Demo基础上做定制修改和优化
 
 ## 截图预览
 
-<img src="screenshots/01.jpg" width="300px" />
+<img src="screenshots/02.jpg" width="300px" />
 
 ## 视频演示
 
