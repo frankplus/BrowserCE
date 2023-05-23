@@ -48,8 +48,7 @@ struct Index {
   aboutToAppear() {
     try {
       let deviceType = parameter.getSync("const.build.characteristics")
-      // 修改为：default 也认为是 phone
-      if (deviceType === 'phone' || deviceType === 'default') {
+      if (deviceType === 'phone') {
         this.isPhone = true
       }
     } catch (e) {

@@ -17,11 +17,11 @@ OpenHarmony 浏览器社区版，在原版Demo基础上做定制修改和优化
 
 > 后续修改说明将不在这里补充，具体请查看commit中的信息
 
-- deviceType如果为default，默认也按phone处理
 - 修复地址栏字体太大被遮挡
 - 修复地址栏输入非https时无法跳转
 - 多处https前缀追加移除，兼容http地址
 - PhoneLayout图标和布局调整，一行显示更多
+- 沉浸适配，底部tab和加载进度条优化
 
 ## 开发环境
 
