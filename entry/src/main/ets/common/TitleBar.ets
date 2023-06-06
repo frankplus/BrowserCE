@@ -221,7 +221,7 @@ export struct BrowserTabs {
 export struct WebTab {
   @Link browser: Browser;
   @Link isPhone: boolean;
-  @Link hideToolBar: Boolean;
+  // @Link hideToolBar: Boolean;
   isRegistered: boolean = false
   testObj = {
     test: (addr) => {
