@@ -12,8 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import promptAction from '@ohos.promptAction'
+import pasteboard from '@ohos.pasteboard'
 import { Browser, LoadingStatus, WebObject } from '../model/Browser'
 import Logger from '../model/Logger'
+import WindowStageUtil from '../util/WindowStageUtil'
+import { DownloadAndInstallHapDialog, LongPressMenuDialog } from './CustomDialog'
 
 const TAG: string = '[TitleBar]'
 const BUTTON_WIDTH: number = 22
@@ -217,6 +221,7 @@ export struct BrowserTabs {
 export struct WebTab {
   @Link browser: Browser;
   @Link isPhone: boolean;
+  @Link hideToolBar: Boolean;
   isRegistered: boolean = false
   testObj = {
     test: (addr) => {
@@ -232,6 +237,28 @@ export struct WebTab {
     }
   }
 
+  dialogController: CustomDialogController;
+  onCancel() {
+    console.info('Callback when the first button is clicked')
+  }
+  onAccept() {
+    console.info('Callback when the second button is clicked')
+  }
+  existApp() {
+    console.info('Click the callback in the blank area')
+  }
+
+  dialogController2: CustomDialogController;
+  onCancel2() {
+    console.info('Callback when the first button is clicked')
+  }
+  onAccept2() {
+    console.info('Callback when the second button is clicked')
+  }
+  existApp2() {
+    console.info('Click the callback in the blank area')
+  }
+
   build() {
     Tabs({ barPosition: BarPosition.Start, controller: this.browser.tabsController }) {
       ForEach(this.browser.webArray, item => {
@@ -241,6 +268,8 @@ export struct WebTab {
             controller: this.browser.webControllerArray[item.key] !== undefined ?
               this.browser.webControllerArray[item.key].controller : undefined
           })
+            .databaseAccess(true)
+            .onlineImageAccess(true)
             .javaScriptAccess(true)
             .fileAccess(true)
             .domStorageAccess(true)
@@ -269,6 +298,90 @@ export struct WebTab {
                 this.browser.hideProgress = true
               } else {
                 this.browser.hideProgress = false
+              }
+            })
+            .onInterceptRequest((event) => {
+              console.log('url:' + event.request.getRequestUrl())
+              return null;
+            })
+            // 自定义网址拦截器
+            .onUrlLoadIntercept((event) => {
+              // 当前网址
+              let url = event.data.toString();
+              console.log('onUrlLoadIntercept ' + url)
+              // 网址协议前缀
+              let urlProtocolPrefix = 'unknown';
+              try {
+                urlProtocolPrefix = url.split('://')[0];
+              } catch (e) {}
+              // 拦截三方客户端协议前缀的网址
+              if (!['http', 'https', 'file', 'data'].includes(urlProtocolPrefix)) {
+                promptAction.showToast({ message: '阻止打开三方协议前缀：'+urlProtocolPrefix, duration: 1000 });
+                return true;
+              }
+              return false;
+            })
+            // 全屏
+            .onFullScreenEnter(() => {
+              // console.log("onFullScreenEnter...")
+              // WindowStageUtil.setLayoutFullScreen(globalThis.windowStage, WindowStageUtil.COLOR_BLACK, WindowStageUtil.COLOR_WHITE, WindowStageUtil.COLOR_BLACK, WindowStageUtil.COLOR_WHITE);
+              // this.hideToolBar = true;
+            })
+            .onFullScreenExit(() => {
+              // console.log("onFullScreenExit...")
+              // WindowStageUtil.setLayoutFullScreen(globalThis.windowStage, WindowStageUtil.COLOR_WHITE, WindowStageUtil.COLOR_BLACK, '#fdfdfd', WindowStageUtil.COLOR_BLACK);
+              // this.hideToolBar = false;
+            })
+            // 长按菜单
+            .onContextMenuShow((event) => {
+              console.info("x coord = " + event.param.x())
+              console.info("link url = " + event.param.getLinkUrl())
+              // 长按事件
+              if (event.param.getSourceType() == ContextMenuSourceType.LongPress) {
+                // 自定义对话框
+                this.dialogController = new CustomDialogController({
+                  builder: LongPressMenuDialog({
+                    browser: $browser,
+                    linkUrl: event.param.getLinkUrl(),
+                    existsImageContents: event.param.existsImageContents(),
+                    sourceUrl: event.param.getSourceUrl(),
+                    cancel: this.onCancel,
+                    confirm: this.onAccept,
+                    controller: this.dialogController
+                  }),
+                  cancel: this.existApp,
+                  autoCancel: true,
+                  alignment: DialogAlignment.Default,
+                  offset: { dx: 0, dy: 0 },
+                  gridCount: 3,
+                  customStyle: false
+                })
+                this.dialogController.open()
+              }
+              return false;
+            })
+            .onDownloadStart((event) => {
+              console.log('url:' + event.url)
+              console.log('userAgent:' + event.userAgent)
+              console.log('contentDisposition:' + event.contentDisposition)
+              console.log('contentLength:' + event.contentLength)
+              console.log('mimetype:' + event.mimetype)
+              if (event.url.endsWith('.hap')) {
+                // 自定义对话框
+                this.dialogController2 = new CustomDialogController({
+                  builder: DownloadAndInstallHapDialog({
+                    url: event.url,
+                    contentDisposition: event.contentDisposition,
+                    controller: this.dialogController2
+                  }),
+                  cancel: this.existApp,
+                  autoCancel: false,
+                  alignment: DialogAlignment.Default,
+                  offset: { dx: 0, dy: -20 },
+                  gridCount: 4,
+                  customStyle: false
+                })
+                this.dialogController2.open()
               }
             })
         }

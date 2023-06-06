@@ -4,7 +4,7 @@
 
 ## 项目介绍
 
-OpenHarmony 浏览器社区版，在原版Demo基础上做定制修改和优化
+浏览器CE（社区版），基于官方demo定制增强，最新版支持下载安装hap、长按菜单等
 
 - 本项目是基于 OpenHarmony官方组织应用示例仓库中的 Browser 子项目进行二次开发的社区版本，同样为 Apache 2.0 许可  
 - 原项目地址：https://gitee.com/openharmony/applications_app_samples/tree/weekly_20230314/code/BasicFeature/Web/Browser  
@@ -22,6 +22,9 @@ OpenHarmony 浏览器社区版，在原版Demo基础上做定制修改和优化
 - 多处https前缀追加移除，兼容http地址
 - PhoneLayout图标和布局调整，一行显示更多
 - 沉浸适配，底部tab和加载进度条优化
+- 支持在线下载安装hap
+- 新增长按菜单，支持和打开和复制链接
+- 重制应用图标，与官方demo区别
 
 ## 开发环境
 
@@ -37,3 +40,7 @@ OpenHarmony 浏览器社区版，在原版Demo基础上做定制修改和优化
 ## 视频演示
 
 https://www.bilibili.com/video/BV1Xs4y1S7UW
+
+## 许可声明
+
+- 应用图标出处：https://www.flaticon.com/free-icon/satellite_1873394

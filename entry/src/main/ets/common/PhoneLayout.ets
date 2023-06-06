@@ -29,6 +29,8 @@ export struct PhoneLayout {
   @State hasDown: boolean = false;
   @State pageCount: string = '1';
   @State arrayIndex: number = 0;
+  @State hideToolBar: boolean = false;
+
   private addr: string = ''
   private toolPoneArray: Array<{
     imageSrc: Resource,
@@ -177,13 +179,14 @@ export struct PhoneLayout {
           }
 
           Column() {
-            WebTab({ browser: $browser, isPhone: $isPhone })
+            WebTab({ browser: $browser, isPhone: $isPhone, hideToolBar: $hideToolBar })
           }
         }
       }
       .hideTitleBar(true)
-      .toolBar(this.ToolBar)
       .hideBackButton(true)
+      .toolBar(this.ToolBar)
+      .hideToolBar(this.hideToolBar)
     }
   }
 }

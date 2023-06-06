@@ -32,6 +32,8 @@ export default class MainAbility extends UIAbility {
         // Main window is created, set main page for this ability
         Logger.info(TAG, `MainAbility onWindowStageCreate`)
 
+        globalThis.abilityContext = this.context;
+        globalThis.windowStage = windowStage;
         WindowStageUtil.setLayoutFullScreen(windowStage, WindowStageUtil.COLOR_WHITE, WindowStageUtil.COLOR_BLACK, '#fdfdfd', WindowStageUtil.COLOR_BLACK);
 
         windowStage.setUIContent(this.context, "pages/Index", null)
