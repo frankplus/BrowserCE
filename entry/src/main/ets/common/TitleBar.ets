@@ -360,6 +360,7 @@ export struct WebTab {
               }
               return false;
             })
+            // 监听下载
             .onDownloadStart((event) => {
               console.log('url:' + event.url)
               console.log('userAgent:' + event.userAgent)

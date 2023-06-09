@@ -61,9 +61,6 @@ struct LongPressMenuDialog {
           this.controller.close()
         })
       }
-      /*if (this.linkUrl.endsWith('.hap')) {
-        Button('下载并安装hap包').width('100%').margin({bottom: 15})
-      }*/
     }.padding({ top: 15, bottom: 0, left: 15, right: 15 })
   }
 
@@ -93,8 +90,6 @@ struct LongPressMenuDialog {
  */
 @CustomDialog
 struct DownloadAndInstallHapDialog {
-  // @State textValue: string = ''
-  // @State inputValue: string = ''
   url: string = ''
   contentDisposition: string = '' // attachment; filename="DeviceInfo-1.2.3.hap"
   controller: CustomDialogController
