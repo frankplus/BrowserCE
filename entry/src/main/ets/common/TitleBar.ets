@@ -315,7 +315,7 @@ export struct WebTab {
                 urlProtocolPrefix = url.split('://')[0];
               } catch (e) {}
               // 拦截三方客户端协议前缀的网址
-              if (!['http', 'https', 'file', 'data'].includes(urlProtocolPrefix)) {
+              if (!['http', 'https', 'file', 'data', 'resource'].includes(urlProtocolPrefix)) {
                 promptAction.showToast({ message: '阻止打开三方协议前缀：'+urlProtocolPrefix, duration: 1000 });
                 return true;
               }
