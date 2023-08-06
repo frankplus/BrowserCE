@@ -57,9 +57,9 @@
       {
         "name": "ohos.permission.GET_WIFI_INFO"
       },
-      {
-        "name": "ohos.permission.INSTALL_BUNDLE"
-      }
+//      {
+//        "name": "ohos.permission.INSTALL_BUNDLE"
+//      }
     ]
   }
 }

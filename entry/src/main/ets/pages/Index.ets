@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import mediaquery from '@ohos.mediaquery'
-import parameter from '@ohos.systemparameter'
+// import parameter from '@ohos.systemparameter'
 import { TabletTitle, BrowserTabs, WebTab } from '../common/TitleBar'
 import { PhoneLayout } from '../common/PhoneLayout'
 import { Browser, LoadingStatus } from '../model/Browser'
@@ -24,7 +24,7 @@ const TAG = '[index]'
 @Entry
 @Component
 struct Index {
-  @State isPhone: boolean= false
+  @State isPhone: boolean= true
   @State browser: Browser= new Browser()
   private isInit: Boolean= false
   listener= mediaquery.matchMediaSync('(orientation:landscape)')
@@ -46,7 +46,7 @@ struct Index {
   }
 
   aboutToAppear() {
-    try {
+    /*try {
       let deviceType = parameter.getSync("const.build.characteristics")
       // 修改为：default 也认为是 phone
       if (deviceType === 'phone' || deviceType === 'default') {
@@ -55,7 +55,7 @@ struct Index {
       }
     } catch (e) {
       Logger.info(TAG, `getSync unexpected error: ${e}`)
-    }
+    }*/
   }
 
   orientationCallback(result) {

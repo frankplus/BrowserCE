@@ -17,7 +17,7 @@
 import pasteboard from '@ohos.pasteboard'
 import promptAction from '@ohos.promptAction'
 import request from '@ohos.request'
-import installer from '@ohos.bundle.installer'
+// import installer from '@ohos.bundle.installer'
 import { Browser } from '../model/Browser'
 import fs from '@ohos.file.fs'
 
@@ -131,18 +131,19 @@ struct DownloadAndInstallHapDialog {
           this.controller.close()
         })
         Button('安装').width('100%').backgroundColor('#3478f6').fontColor('#eeeeee').margin({left:7.5}).onClick(() => {
-          if (this.installLoading) {
+          /*if (this.installLoading) {
             promptAction.showToast({ message: '下载并安装中，请稍后...', duration: ToastDuration })
             return
           }
           this.installLoading = true
-          this.checkLocalFile()
+          this.checkLocalFile()*/
+          promptAction.showToast({ message: '无权限', duration: ToastDuration });
         })
       }
     }.padding(15)
   }
 
-  checkLocalFile() {
+  /*checkLocalFile() {
     let filePath = globalThis.abilityContext.filesDir + '/' + this.fileName;
 
     fs.access(filePath).then((res) => {
@@ -229,7 +230,7 @@ struct DownloadAndInstallHapDialog {
       this.installLoading = false;
       promptAction.showToast({ message: '安装失败：' + error.message, duration: ToastDuration });
     }
-  }
+  }*/
 }
 
 export { LongPressMenuDialog, DownloadAndInstallHapDialog }
