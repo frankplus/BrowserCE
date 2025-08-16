@@ -127,3 +127,6 @@ export class Browser {
     this.webControllerArray[this.tabArrayIndex].controller.refresh()
   }
 }
+
+//export WebKey
+export { WebKey }

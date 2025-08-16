@@ -16,6 +16,11 @@ import { Browser } from '../model/Browser'
 import { WebTab } from './TitleBar'
 import Logger from '../model/Logger'
 
+interface ButtonItem {
+  imageSrc: Resource
+  id: number
+}
+
 const TAG: string = '[PhoneLayout]'
 const BUTTON_WIDTH: number = 22
 const BUTTON_RADIUS: number = 4
@@ -32,26 +37,23 @@ export struct PhoneLayout {
   // @State hideToolBar: boolean = false;
 
   private addr: string = ''
-  private toolPoneArray: Array<{
-    imageSrc: Resource,
-    id: number
-  }> = [
+  private toolPoneArray: Array<ButtonItem> = [
     {
       imageSrc: $r('app.media.ic_public_back'),
       id: 1
-    },
+    } as ButtonItem,
     {
       imageSrc: $r('app.media.ic_public_advance'),
       id: 2
-    },
+    } as ButtonItem,
     {
       imageSrc: $r('app.media.ic_public_home'),
       id: 5
-    },
+    } as ButtonItem,
     {
       imageSrc: $r('app.media.ic_public_refresh'),
       id: 3
-    }
+    } as ButtonItem
   ]
 
   @Builder ToolBar() {
@@ -64,7 +66,7 @@ export struct PhoneLayout {
         Column().backgroundColor('#fdfdfd').width('100%').height(2)
       }
       Row() {
-        ForEach(this.toolPoneArray, item => {
+        ForEach(this.toolPoneArray, (item: ButtonItem) => {
           Column() {
             Button({ type: ButtonType.Normal }) {
               Column() {

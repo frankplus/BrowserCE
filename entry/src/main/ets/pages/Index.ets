@@ -58,18 +58,6 @@ struct Index {
     }
   }
 
-  orientationCallback(result) {
-    if (!this.isInit) {
-      if (result.matches) {
-        this.isPhone = false
-      } else {
-        this.isPhone = true
-      }
-      this.isInit = true
-    }
-    Logger.info(TAG, `orientationCallback end,isPhone=${this.isPhone}`)
-  }
-
   onBackPress(): boolean{
     Logger.info(TAG, `enter onBackPress`)
     if (this.browser.webControllerArray[this.browser.tabArrayIndex].controller.accessBackward() ||

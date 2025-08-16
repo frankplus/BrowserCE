@@ -17,7 +17,13 @@ import pasteboard from '@ohos.pasteboard'
 import { Browser, LoadingStatus, WebObject } from '../model/Browser'
 import Logger from '../model/Logger'
 import WindowStageUtil from '../util/WindowStageUtil'
-import { DownloadAndInstallHapDialog, LongPressMenuDialog } from './CustomDialog'
+import { LongPressMenuDialog } from './CustomDialog'
+import { WebKey } from '../model/Browser'
+
+interface ButtonItem {
+  imageSrc: Resource
+  id: number
+}
 
 const TAG: string = '[TitleBar]'
 const BUTTON_WIDTH: number = 22
@@ -42,44 +48,38 @@ export struct TabletTitle {
   @State inputValue: string = ''
   @State arrayIndex: number = 0
   private addr: string = ''
-  private navigationButton: Array<{
-    imageSrc: Resource,
-    id: number
-  }> = [
+  private navigationButton: Array<ButtonItem> = [
     {
       imageSrc: $r('app.media.ic_public_back'),
       id: 1
-    },
+    } as ButtonItem,
     {
       imageSrc: $r('app.media.ic_public_advance'),
       id: 2
-    },
+    } as ButtonItem,
     {
       imageSrc: $r('app.media.ic_public_refresh'),
       id: 3
-    },
+    } as ButtonItem,
     {
       imageSrc: $r('app.media.ic_public_home'),
       id: 4
-    },
+    } as ButtonItem,
   ]
-  private actionButton: Array<{
-    imageSrc: Resource,
-    id: number
-  }> = [
+  private actionButton: Array<ButtonItem> = [
     {
       imageSrc: $r('app.media.submit'),
       id: 5
-    },
+    } as ButtonItem,
     {
       imageSrc: $r('app.media.ic_public_add'),
       id: 6
-    },
+    } as ButtonItem,
   ]
 
   build() {
     Row() {
-      ForEach(this.navigationButton, item => {
+      ForEach(this.navigationButton, (item: ButtonItem) => {
         Button({ type: ButtonType.Normal }) {
           Image(item.imageSrc)
         }
@@ -116,7 +116,7 @@ export struct TabletTitle {
               break;
           }
         })
-      }, item => item.id)
+      })
 
       TextInput({ placeholder: '输入网址...', text: this.browser.inputValue })
         .placeholderFont({ size: 18, weight: 500 })
@@ -137,7 +137,7 @@ export struct TabletTitle {
           }
         })
 
-      ForEach(this.actionButton, item => {
+      ForEach(this.actionButton, (item: ButtonItem) => {
         Button({ type: ButtonType.Normal }) {
           Image(item.imageSrc)
         }
@@ -164,7 +164,7 @@ export struct TabletTitle {
             this.browser.addTab()
           }
         })
-      }, item => item.id)
+      })
     }
     .width('100%')
     .padding({ right: 5 })
@@ -178,7 +178,7 @@ export struct BrowserTabs {
 
   build() {
     Flex({ direction: FlexDirection.Row, alignItems: ItemAlign.Start }) {
-      ForEach(this.browser.webArray, item => {
+      ForEach(this.browser.webArray, (item: WebKey) => {
         Row() {
           Row() {
             Text('主页')
@@ -212,9 +212,14 @@ export struct BrowserTabs {
         })
 
         Divider().vertical(true).color('#c6c6c6')
-      }, item => item.timestamp.toString())
+      })
     }.height(33).flexShrink(0).backgroundColor('#ececec')
   }
+}
+
+interface TestObj {
+  test: (addr: string) => void;
+  searchWord: (word: string) => void;
 }
 
 @Component
@@ -223,8 +228,9 @@ export struct WebTab {
   @Link isPhone: boolean;
   // @Link hideToolBar: Boolean;
   isRegistered: boolean = false
-  testObj = {
-    test: (addr) => {
+
+  testObj: TestObj = {
+    test: (addr: string) => {
       Logger.info(TAG, `addr= ${this.browser.tabArrayIndex}`)
       this.browser.webControllerArray[this.browser.tabArrayIndex].controller.loadUrl({ url: `${addr}` }) // 移除追加 https:// 前缀
     },
@@ -237,7 +243,7 @@ export struct WebTab {
     }
   }
 
-  dialogController: CustomDialogController;
+  dialogController?: CustomDialogController = undefined;
   onCancel() {
     console.info('Callback when the first button is clicked')
   }
@@ -248,7 +254,7 @@ export struct WebTab {
     console.info('Click the callback in the blank area')
   }
 
-  dialogController2: CustomDialogController;
+  dialogController2?: CustomDialogController = undefined;
   onCancel2() {
     console.info('Callback when the first button is clicked')
   }
@@ -261,7 +267,7 @@ export struct WebTab {
 
   build() {
     Tabs({ barPosition: BarPosition.Start, controller: this.browser.tabsController }) {
-      ForEach(this.browser.webArray, item => {
+      ForEach(this.browser.webArray, (item: WebKey) => {
         TabContent() {
           Web({
             src: this.isPhone ? $rawfile('phone.html') : $rawfile('pad.html'),
@@ -306,6 +312,10 @@ export struct WebTab {
             })
             // 自定义网址拦截器
             .onUrlLoadIntercept((event) => {
+              if (!event || !event.data) {
+                return false
+              }
+
               // 当前网址
               let url = event.data.toString();
               console.log('onUrlLoadIntercept ' + url)
@@ -345,8 +355,6 @@ export struct WebTab {
                     linkUrl: event.param.getLinkUrl(),
                     existsImageContents: event.param.existsImageContents(),
                     sourceUrl: event.param.getSourceUrl(),
-                    cancel: this.onCancel,
-                    confirm: this.onAccept,
                     controller: this.dialogController
                   }),
                   cancel: this.existApp,
@@ -367,27 +375,10 @@ export struct WebTab {
               console.log('contentDisposition:' + event.contentDisposition)
               console.log('contentLength:' + event.contentLength)
               console.log('mimetype:' + event.mimetype)
-              if (event.url.endsWith('.hap')) {
-                // 自定义对话框
-                this.dialogController2 = new CustomDialogController({
-                  builder: DownloadAndInstallHapDialog({
-                    url: event.url,
-                    contentDisposition: event.contentDisposition,
-                    controller: this.dialogController2
-                  }),
-                  cancel: this.existApp,
-                  autoCancel: false,
-                  alignment: DialogAlignment.Default,
-                  offset: { dx: 0, dy: -20 },
-                  gridCount: 4,
-                  customStyle: false
-                })
-                this.dialogController2.open()
-              }
             })
         }
         .padding({bottom: 35.5})
-      }, item => item.timestamp.toString())
+      })
     }
     .barHeight(0)
     .scrollable(false)
