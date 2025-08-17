@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import { Browser } from '../model/Browser'
-import { WebTab } from './TitleBar'
+import { WebTab, BrowserTabs } from './TitleBar'
 import Logger from '../model/Logger'
 
 interface ButtonItem {
@@ -53,6 +53,10 @@ export struct PhoneLayout {
     {
       imageSrc: $r('app.media.ic_public_refresh'),
       id: 3
+    } as ButtonItem,
+    {
+      imageSrc: $r('app.media.ic_public_add'),
+      id: 6
     } as ButtonItem
   ]
 
@@ -116,12 +120,16 @@ export struct PhoneLayout {
                     url: $rawfile('phone.html')
                   })
                   break;
+                case 6:
+                  Logger.info(TAG, `add tab index = ` + this.arrayIndex)
+                  this.browser.addTab()
+                  break;
                 default:
                   break;
               }
             })
           }
-          .width('20%')
+          .width('18%')
         })
       }
       .justifyContent(FlexAlign.SpaceAround)
@@ -179,6 +187,10 @@ export struct PhoneLayout {
               this.addr = ''
             })
           }
+
+          // Add tab bar for phone layout
+          BrowserTabs({ browser: $browser })
+          Divider().color('#c6c6c6').width('100%').flexShrink(0)
 
           Column() {
             WebTab({ browser: $browser, isPhone: $isPhone })
