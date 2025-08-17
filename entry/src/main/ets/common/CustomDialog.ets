@@ -15,7 +15,8 @@
  */
 
 import pasteboard from '@ohos.pasteboard'
-import promptAction from '@ohos.promptAction'
+import { BusinessError } from '@kit.BasicServicesKit';
+import { PromptAction, UIContext } from "@ohos.arkui.UIContext";
 import request from '@ohos.request'
 import installer from '@ohos.bundle.installer'
 import { Browser } from '../model/Browser'
@@ -33,6 +34,8 @@ struct LongPressMenuDialog {
   existsImageContents: boolean = false
   sourceUrl: string = ''
   controller: CustomDialogController
+  uiContext: UIContext = this.getUIContext();
+  promptAction: PromptAction = this.uiContext.getPromptAction();
 
   aboutToAppear() {
   }
@@ -74,11 +77,12 @@ struct LongPressMenuDialog {
       }
       console.info('Succeeded in setting PasteData.');
       // 提示
-      try {
-        promptAction.showToast({message: '已复制 ' + name, duration: 1000});
-      } catch (error) {
-        console.error(`showToast args error code is ${error.code}, message is ${error.message}`);
-      };
+      this.promptAction.openToast({
+        message: '已复制 ' + name,
+        duration: 1000
+      }).catch((error: BusinessError) => {
+        console.error(`openToast error code is ${error.code}, message is ${error.message}`);
+      });
     });
   }
 }

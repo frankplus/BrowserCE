@@ -12,7 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import promptAction from '@ohos.promptAction'
+import { BusinessError } from '@kit.BasicServicesKit';
+import { PromptAction, UIContext } from "@ohos.arkui.UIContext";
 import pasteboard from '@ohos.pasteboard'
 import { Browser, LoadingStatus, WebObject } from '../model/Browser'
 import Logger from '../model/Logger'
@@ -224,6 +225,8 @@ export struct WebTab {
   @Link isPhone: boolean;
   // @Link hideToolBar: Boolean;
   isRegistered: boolean = false
+  uiContext: UIContext = this.getUIContext();
+  promptAction: PromptAction = this.uiContext.getPromptAction();
 
   testObj: TestObj = {
     test: (addr: string) => {
@@ -320,7 +323,12 @@ export struct WebTab {
               } catch (e) {}
               // 拦截三方客户端协议前缀的网址
               if (!['http', 'https', 'file', 'data', 'resource'].includes(urlProtocolPrefix)) {
-                promptAction.showToast({ message: '阻止打开三方协议前缀：'+urlProtocolPrefix, duration: 1000 });
+                this.promptAction.openToast({
+                  message: '阻止打开三方协议前缀：' + urlProtocolPrefix,
+                  duration: 1000
+                }).catch((error: BusinessError) => {
+                  console.error(`openToast error code is ${error.code}, message is ${error.message}`);
+                });
                 return true;
               }
               return false;

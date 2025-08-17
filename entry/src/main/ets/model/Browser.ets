@@ -13,7 +13,8 @@
  * limitations under the License.
  */
 import Logger from './Logger'
-import prompt from '@ohos.prompt';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { PromptAction, UIContext } from "@ohos.arkui.UIContext";
 import { webview } from '@kit.ArkWeb';
 
 export class WebObject {
@@ -49,10 +50,15 @@ export class Browser {
   progress: number = 0
   hideProgress: boolean = true
   loadingStatus: LoadingStatus = LoadingStatus.END
+  promptAction?: PromptAction
 
   webArray: Array<WebKey> = [new WebKey(0, new Date().getTime())]
   tabsController: TabsController = new TabsController()
   webControllerArray: Array<WebObject> = [new WebObject(new webview.WebviewController(), false)]
+
+  setPromptAction(promptAction: PromptAction) {
+    this.promptAction = promptAction
+  }
 
   deleteTab(index: number) {
     Logger.info(TAG, `delete before tab index= ${index} controller length ${this.webControllerArray.length} tabArrayIndex= ${this.tabArrayIndex}`)
@@ -77,9 +83,13 @@ export class Browser {
 
   addTab() {
     if (this.webArray.length > 10) {
-      prompt.showToast({
-        message: '页签数量已满'
-      })
+      if (this.promptAction) {
+        this.promptAction.openToast({
+          message: '页签数量已满'
+        }).catch((error: BusinessError) => {
+          console.error(`openToast error code is ${error.code}, message is ${error.message}`);
+        })
+      }
       return;
     }
     let webController: webview.WebviewController = new webview.WebviewController();

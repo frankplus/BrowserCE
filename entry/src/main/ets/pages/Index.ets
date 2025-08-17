@@ -18,6 +18,7 @@ import { TabletTitle, BrowserTabs, WebTab } from '../common/TitleBar'
 import { PhoneLayout } from '../common/PhoneLayout'
 import { Browser, LoadingStatus } from '../model/Browser'
 import Logger from '../model/Logger'
+import { PromptAction, UIContext } from "@ohos.arkui.UIContext";
 
 const TAG = '[index]'
 
@@ -28,6 +29,8 @@ struct Index {
   @State browser: Browser= new Browser()
   private isInit: Boolean= false
   listener= mediaquery.matchMediaSync('(orientation:landscape)')
+  uiContext: UIContext = this.getUIContext();
+  promptAction: PromptAction = this.uiContext.getPromptAction();
 
   build() {
     Column() {
@@ -46,6 +49,9 @@ struct Index {
   }
 
   aboutToAppear() {
+    // Set the PromptAction for the browser
+    this.browser.setPromptAction(this.promptAction);
+    
     try {
       let deviceType = parameter.getSync("const.build.characteristics")
       // 修改为：default 也认为是 phone
@@ -70,5 +76,7 @@ struct Index {
 
   onDeviceChange() {
     this.browser = new Browser()
+    // Set the PromptAction for the new browser instance
+    this.browser.setPromptAction(this.promptAction);
   }
 }
