@@ -85,7 +85,7 @@ export class Browser {
     if (this.webArray.length > 10) {
       if (this.promptAction) {
         this.promptAction.openToast({
-          message: '页签数量已满'
+          message: $r('app.string.toast_tab_limit_reached').toString()
         }).catch((error: BusinessError) => {
           console.error(`openToast error code is ${error.code}, message is ${error.message}`);
         })

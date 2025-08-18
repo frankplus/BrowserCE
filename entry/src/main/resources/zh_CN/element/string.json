@@ -10,51 +10,51 @@
     },
     {
       "name": "MainAbility_label",
-      "value": "Browser CE"
+      "value": "浏览器CE"
     },
     {
       "name": "placeholder_enter_url",
-      "value": "Enter URL..."
+      "value": "输入网址..."
     },
     {
       "name": "tab_home",
-      "value": "Home"
+      "value": "主页"
     },
     {
       "name": "toast_block_protocol",
-      "value": "Blocked opening third-party protocol prefix: "
+      "value": "阻止打开三方协议前缀："
     },
     {
       "name": "dialog_open_link",
-      "value": "Open Link"
+      "value": "打开链接"
     },
     {
       "name": "dialog_copy_link",
-      "value": "Copy Link"
+      "value": "复制链接"
     },
     {
       "name": "dialog_open_image_link",
-      "value": "Open Image Link"
+      "value": "打开图片链接"
     },
     {
       "name": "dialog_copy_image_link",
-      "value": "Copy Image Link"
+      "value": "复制图片链接"
     },
     {
       "name": "toast_copied",
-      "value": "Copied "
+      "value": "已复制 "
     },
     {
       "name": "copy_type_link",
-      "value": "link"
+      "value": "链接"
     },
     {
       "name": "copy_type_image_link",
-      "value": "image link"
+      "value": "图片链接"
     },
     {
       "name": "toast_tab_limit_reached",
-      "value": "Tab limit reached"
+      "value": "页签数量已满"
     }
   ]
 }

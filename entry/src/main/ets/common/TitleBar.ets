@@ -118,7 +118,7 @@ export struct TabletTitle {
         })
       })
 
-      TextInput({ placeholder: '输入网址...', text: this.browser.inputValue })
+      TextInput({ placeholder: $r('app.string.placeholder_enter_url'), text: this.browser.inputValue })
         .placeholderFont({ size: 18, weight: 500 })
         .fontSize(18)
         .margin(2)
@@ -179,7 +179,7 @@ export struct BrowserTabs {
       ForEach(this.browser.webArray, (item: WebKey) => {
         Row() {
           Row() {
-            Text('主页')
+            Text($r('app.string.tab_home'))
           }.width('100%').flexShrink(1).justifyContent(FlexAlign.Center).height('100%')
 
           Button({ type: ButtonType.Normal }) {
@@ -332,7 +332,7 @@ export struct WebTab {
               // 拦截三方客户端协议前缀的网址
               if (!['http', 'https', 'file', 'data', 'resource'].includes(urlProtocolPrefix)) {
                 this.promptAction.openToast({
-                  message: '阻止打开三方协议前缀：' + urlProtocolPrefix,
+                  message: $r('app.string.toast_block_protocol').toString() + urlProtocolPrefix,
                   duration: 1000
                 }).catch((error: BusinessError) => {
                   console.error(`openToast error code is ${error.code}, message is ${error.message}`);

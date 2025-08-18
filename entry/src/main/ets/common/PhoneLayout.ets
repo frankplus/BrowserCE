@@ -146,7 +146,7 @@ export struct PhoneLayout {
       Navigation() {
         Column() {
           Row() {
-            TextInput({ placeholder: '输入网址...', text: this.browser.inputValue })
+            TextInput({ placeholder: $r('app.string.placeholder_enter_url'), text: this.browser.inputValue })
               // 字体太大被遮挡，调成14
               .placeholderFont({ size: 14, weight: 500 })
               .fontSize(14)

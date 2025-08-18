@@ -43,22 +43,22 @@ struct LongPressMenuDialog {
   build() {
     Column() {
       if (this.linkUrl.trim().length > 0) {
-        Button('打开链接').width('100%').margin({bottom: 15}).onClick((e) => {
+        Button($r('app.string.dialog_open_link')).width('100%').margin({bottom: 15}).onClick((e) => {
           this.browser.webControllerArray[this.browser.tabArrayIndex].controller.loadUrl(this.linkUrl)
           this.controller.close()
         })
-        Button('复制链接').width('100%').margin({bottom: 15}).onClick((e) => {
-          this.copyText('链接', this.linkUrl)
+        Button($r('app.string.dialog_copy_link')).width('100%').margin({bottom: 15}).onClick((e) => {
+          this.copyText($r('app.string.copy_type_link').toString(), this.linkUrl)
           this.controller.close()
         })
       }
       if (this.existsImageContents && this.sourceUrl.length > 0) {
-        Button('打开图片链接').width('100%').margin({bottom: 15}).onClick((e) => {
+        Button($r('app.string.dialog_open_image_link')).width('100%').margin({bottom: 15}).onClick((e) => {
           this.browser.webControllerArray[this.browser.tabArrayIndex].controller.loadUrl(this.sourceUrl)
           this.controller.close()
         })
-        Button('复制图片链接').width('100%').margin({bottom: 15}).onClick((e) => {
-          this.copyText('图片链接', this.sourceUrl)
+        Button($r('app.string.dialog_copy_image_link')).width('100%').margin({bottom: 15}).onClick((e) => {
+          this.copyText($r('app.string.copy_type_image_link').toString(), this.sourceUrl)
           this.controller.close()
         })
       }
@@ -78,7 +78,7 @@ struct LongPressMenuDialog {
       console.info('Succeeded in setting PasteData.');
       // 提示
       this.promptAction.openToast({
-        message: '已复制 ' + name,
+        message: $r('app.string.toast_copied').toString() + name,
         duration: 1000
       }).catch((error: BusinessError) => {
         console.error(`openToast error code is ${error.code}, message is ${error.message}`);
