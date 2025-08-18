@@ -15,6 +15,7 @@
 import { BusinessError } from '@kit.BasicServicesKit';
 import { PromptAction, UIContext } from "@ohos.arkui.UIContext";
 import pasteboard from '@ohos.pasteboard'
+import { webview } from '@kit.ArkWeb';
 import { Browser, LoadingStatus, WebObject } from '../model/Browser'
 import Logger from '../model/Logger'
 import WindowStageUtil from '../util/WindowStageUtil'
@@ -276,7 +277,14 @@ export struct WebTab {
             .javaScriptAccess(true)
             .fileAccess(true)
             .domStorageAccess(true)
-            .userAgent(this.isPhone ? PHONE_USER_AGENT : PAD_USER_AGENT)
+            .onControllerAttached(() => {
+              try {
+                const customUserAgent = this.isPhone ? PHONE_USER_AGENT : PAD_USER_AGENT;
+                this.browser.webControllerArray[item.key].controller.setCustomUserAgent(customUserAgent);
+              } catch (error) {
+                Logger.error(TAG, `setCustomUserAgent error: ${(error as BusinessError).code}, ${(error as BusinessError).message}`);
+              }
+            })
             .onPageBegin((event) => {
               Logger.info(TAG, `onPageBegin= ${JSON.stringify(event)}`)
               this.browser.loadingStatus = LoadingStatus.LOADING
