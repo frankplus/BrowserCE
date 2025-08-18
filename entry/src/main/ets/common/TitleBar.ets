@@ -316,14 +316,14 @@ export struct WebTab {
               return null;
             })
             // 自定义网址拦截器
-            .onUrlLoadIntercept((event) => {
+            .onLoadIntercept((event) => {
               if (!event || !event.data) {
                 return false
               }
 
               // 当前网址
-              let url = event.data.toString();
-              console.log('onUrlLoadIntercept ' + url)
+              let url = event.data.getRequestUrl();
+              console.log('onLoadIntercept ' + url)
               // 网址协议前缀
               let urlProtocolPrefix = 'unknown';
               try {
