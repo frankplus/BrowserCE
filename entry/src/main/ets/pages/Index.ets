@@ -14,7 +14,9 @@
  */
 import mediaquery from '@ohos.mediaquery'
 import parameter from '@ohos.systemparameter'
-import { TabletTitle, BrowserTabs, WebTab } from '../common/TitleBar'
+import { TabletNavigationBar } from '../common/TabletNavigationBar'
+import { BrowserTabsBar } from '../common/BrowserTabsBar'
+import { WebContainer } from '../common/WebContainer'
 import { PhoneLayout } from '../common/PhoneLayout'
 import { Browser, LoadingStatus } from '../model/Browser'
 import Logger from '../model/Logger'
@@ -35,13 +37,13 @@ struct Index {
   build() {
     Column() {
       if (!this.isPhone) {
-        TabletTitle({ browser: $browser })
+        TabletNavigationBar({ browser: $browser })
         Progress({ value: this.browser.progress, total: 100 })
           .color('#0000ff')
           .visibility(this.browser.hideProgress ? Visibility.None : Visibility.Visible)
-        BrowserTabs({ browser: $browser })
+        BrowserTabsBar({ browser: $browser })
         Divider().color('#c6c6c6').width('100%').flexShrink(0)
-        WebTab({ browser: $browser, isPhone: $isPhone })
+        WebContainer({ browser: $browser, isPhone: $isPhone })
       } else {
         PhoneLayout({ browser: $browser })
       }

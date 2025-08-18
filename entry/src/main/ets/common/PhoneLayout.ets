@@ -13,19 +13,12 @@
  * limitations under the License.
  */
 import { Browser } from '../model/Browser'
-import { WebTab, BrowserTabs } from './TitleBar'
+import { WebContainer } from './WebContainer'
+import { BrowserTabsBar } from './BrowserTabsBar'
 import Logger from '../model/Logger'
-
-interface ButtonItem {
-  imageSrc: Resource
-  id: number
-}
+import { ButtonItem, BUTTON_WIDTH, BUTTON_RADIUS, DOWN_COLOR, UP_COLOR } from './BrowserConstants'
 
 const TAG: string = '[PhoneLayout]'
-const BUTTON_WIDTH: number = 22
-const BUTTON_RADIUS: number = 4
-const DOWN_COLOR: string = '#e4e4e4'
-const UP_COLOR: string = '#00000000'
 
 @Component
 export struct PhoneLayout {
@@ -185,12 +178,12 @@ export struct PhoneLayout {
           }
 
           // Add tab bar for phone layout
-          BrowserTabs({ browser: $browser })
+          BrowserTabsBar({ browser: $browser })
           Divider().color('#c6c6c6').width('100%').flexShrink(0)
 
           Column() {
-            WebTab({ browser: $browser, isPhone: $isPhone })
-            // WebTab({ browser: $browser, isPhone: $isPhone, hideToolBar: $hideToolBar })
+            WebContainer({ browser: $browser, isPhone: $isPhone })
+            // WebContainer({ browser: $browser, isPhone: $isPhone, hideToolBar: $hideToolBar })
           }
         }
       }
